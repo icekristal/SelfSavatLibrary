@@ -7,7 +7,7 @@
   },
   "homepage": "https://github.com/icekristal/selfsavatlibrary",
   "autoload":{
-    "classmap": [
+    "files": [
       "savtotalfunc.php"
     ]
   }
