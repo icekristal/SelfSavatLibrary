@@ -75,3 +75,7 @@ function str2url($str) {
     $str = trim($str, "-");
     return $str;
 }
+
+function testgit(){
+    echo "Testing GitHub";
+}
