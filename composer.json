@@ -8,7 +8,8 @@
   "homepage": "https://github.com/icekristal/selfsavatlibrary",
   "autoload":{
     "files": [
-      "savtotalfunc.php"
+      "savtotalfunc.php",
+      "function/security_function.php"
     ]
   }
 }
