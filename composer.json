@@ -1,0 +1,11 @@
+{
+  "name": "icekristal/SelfSavatLibrary",
+  "type": "library",
+  "description": "Savatneev Self Library",
+  "require": {
+    "php": ">=5.4.0"
+  },
+  "autoload":{
+   "files":["savtotalfunc.php"]
+  }
+}
