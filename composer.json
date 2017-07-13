@@ -1,12 +1,14 @@
 {
   "name": "icekristal/selfsavatlibrary",
-  "type": "library",
   "description": "Savatneev Self Library",
   "require": {
     "php": ">=5.3.0"
   },
   "homepage": "https://github.com/icekristal/selfsavatlibrary",
   "autoload":{
+    "classmap": [
+      "EmailSend.php"
+    ],
     "files": [
       "savtotalfunc.php"
     ]
