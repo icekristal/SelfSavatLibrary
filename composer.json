@@ -7,7 +7,7 @@
   "homepage": "https://github.com/icekristal/selfsavatlibrary",
   "autoload":{
     "classmap": [
-      "EmailSend.php"
+      "function/EmailSend.php"
     ],
     "files": [
       "savtotalfunc.php"
