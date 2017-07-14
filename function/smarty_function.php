@@ -7,24 +7,18 @@
  * @param $controllerName
  * @param string $actionName
  */
-function loadPage($smarty, $controllerName, $actionName = 'index'){
+function loadPage($smarty, $controllerName, $actionName = 'index',$besides=array()){
     $filename = PathPrefix . $controllerName . PathPostfix;
     if (!file_exists($filename)) {
         $controllerName = 'Error';
     }
 
-    if($controllerName == 'Catalog'){
-        $actionName = 'Index';
+    //Свойство besides - помимо этих контроллеров, для них сразу ставим Index
+    foreach ($besides as $beside) {
+        if($beside==$controllerName){
+            $actionName = 'Index';
+        }
     }
-
-    if($controllerName == 'Blog'){
-        $actionName = 'Index';
-    }
-
-    if($controllerName == 'Teachers'){
-        $actionName = 'Index';
-    }
-
 
     include_once PathPrefix . $controllerName . PathPostfix;
     $function = $actionName.'Action';
