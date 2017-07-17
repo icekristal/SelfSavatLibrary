@@ -9,15 +9,17 @@
  */
 function loadPage($smarty, $controllerName, $actionName = 'index',$besides=array()){
     $filename = PathPrefix . $controllerName . PathPostfix;
-    if (!file_exists($filename)) {
-        $controllerName = 'Error';
-    }
 
     //Свойство besides - помимо этих контроллеров, для них сразу ставим Index
     foreach ($besides as $beside) {
         if($beside==$controllerName){
             $actionName = 'Index';
         }
+    }
+
+    if (!file_exists($filename)) {
+        $controllerName = 'Error';
+        $actionName = 'Index';
     }
 
     include_once PathPrefix . $controllerName . PathPostfix;
