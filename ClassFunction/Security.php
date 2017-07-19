@@ -13,7 +13,7 @@ class Security
 {
 
     //Проверка форм
-    public function FormChar($param,$connect=null){
+    public static function FormChar($param,$connect=null){
             if(isset($connect)){
                 $param = mysqli_real_escape_string($connect,$param);
             }
