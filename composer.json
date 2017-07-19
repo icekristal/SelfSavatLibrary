@@ -6,11 +6,9 @@
   },
   "homepage": "https://github.com/icekristal/selfsavatlibrary",
   "autoload":{
-    "classmap": [
-      "function/EmailSend.php"
-    ],
-    "files": [
-      "savtotalfunc.php"
-    ]
+    "psr-4":{
+      "fnc\\":"ClassFunction/"
+    }
   }
+
 }
