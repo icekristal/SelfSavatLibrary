@@ -24,6 +24,8 @@ class Entrance
         if($check_bot){
           if(!$this->NewOrOldUser()){
               $this->setCookieHash();
+          }else{
+              $this->user_hash=$this->NewOrOldUser();
           }
         }
     }
@@ -97,7 +99,7 @@ class Entrance
 
     private function NewOrOldUser(){
         $userhash = isset($_COOKIE["UserHash"]) ? $_COOKIE["UserHash"] : null;
-        $result = true;
+        $result = $userhash;
         if($userhash==null){
             $result =false;
         }
