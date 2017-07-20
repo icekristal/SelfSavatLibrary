@@ -47,7 +47,6 @@ function authzahodclient(){
 
     $href_new_client = $_SERVER['REQUEST_URI'];
     if(!empty($_SERVER['HTTP_REFERER'])){
-
         $href_new_client_pere = $_SERVER['HTTP_REFERER'];
     }else{
         $href_new_client_pere = 'Прямой заход';
