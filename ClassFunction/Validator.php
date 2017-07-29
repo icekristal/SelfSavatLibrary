@@ -15,7 +15,28 @@ class Validator
         return $result;
     }
 
+    //Проверяем является ли запрос JSON
+    public static function isJson(){
+        if (!isset($_SERVER['HTTP_X_REQUESTED_WITH'])){
+            return false;
+        }else{
+            if(strtolower($_SERVER['HTTP_X_REQUESTED_WITH']) != 'xmlhttprequest') {
+                return false;
+            }
+        }
+        return true;
+    }
 
+    //Проверяем на пустоту входящего массива
+    public static function isEmpty($array = array()){
+        $Valid = true;
+        foreach ($array as $item){
+            if(empty($item)){
+                $Valid = false;
+            }
+        }
+        return $Valid;
+    }
 
 
 }
