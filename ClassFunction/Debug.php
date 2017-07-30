@@ -12,7 +12,12 @@ namespace fnc;
 class Debug
 {
 
-    public function d($value = null, $die = 1){
+    function __construct($value,$die)
+    {
+        $this->d($value,$die);
+    }
+
+    private function d($value = null, $die = 1){
         echo '<pre>';
         $trace = debug_backtrace();
         echo $this->debugOut($trace);
