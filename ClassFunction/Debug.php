@@ -12,7 +12,7 @@ namespace fnc;
 class Debug
 {
 
-    function __construct($value,$die)
+   function __construct($value,$die)
     {
         $this->d($value,$die);
     }
