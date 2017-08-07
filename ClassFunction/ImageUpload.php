@@ -22,9 +22,11 @@ class ImageUpload
      * @param null $size - либо 1 либо 1 / нужен или нет новый размер
      * @param null $swidth / если size 1 - то это новая ширина
      * @param null $sheight / если size 1 - то это новая высота
-     * @return bool|string на выходе новое имя
+     * @return array
      */
-    public static function upload_image($image, $tmp_path, $new_name, $size = null, $swidth=null, $sheight=null){
+    public static function uploadimage($image, $tmp_path, $new_name, $size = null, $swidth=null, $sheight=null){
+        $rezData = array();
+
         $result = true;
         $source = null;
 
@@ -36,9 +38,15 @@ class ImageUpload
         $validFormat = array('jpg' , 'jpeg' , 'png' );
         $resultFormat = self::checkValidFormat($image['name'], $validFormat);
         if(!$resultFormat){
+            $rezData['success']=0;
+            $rezData['message']="Не верный формат изображения";
+            return $rezData;
+        }
 
-            $result =false;
-            return $result;
+        if($image["size"] > upload_max_filesize){
+            $rezData['success']=0;
+            $rezData['message']="Большой размер файла";
+            return $rezData;
         }
 
         $type_n = 0;
@@ -55,13 +63,15 @@ class ImageUpload
             $type_n = 1;
         }
         else {
-            $result =false;
-            return $result;
+            $rezData['success']=0;
+            $rezData['message']="Не верный формат изображения";
+            return $rezData;
         }
 
         if(!$source){
-            $result =false;
-            return $result;
+            $rezData['success']=0;
+            $rezData['message']="Не загружено изображение";
+            return $rezData;
         }
 
         if($result){
@@ -99,18 +109,23 @@ class ImageUpload
             }
             imagedestroy($dest);
             imagedestroy($source);
-            $result = $new_name;
+            $rezData['success']=1;
+            $rezData['file_name']=$new_name;
         }
 
 
-        return $result;
+        return $rezData;
     }
+
 
 
     private static function checkValidFormat($file, $validFormat){
         // определяем формат файла
-        $format = end(explode(".", $file));
-        if(in_array(strtolower($format), $validFormat)){
+
+
+        $tmp = explode('.', $file);
+        $file_extension = end($tmp);
+        if(in_array(strtolower($file_extension), $validFormat)){
             return true;
         }
         return false;

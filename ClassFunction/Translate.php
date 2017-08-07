@@ -1,10 +1,5 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: Savatneev Anton
- * Date: 07.08.2017
- * Time: 9:58
- */
+
 
 namespace fnc;
 
