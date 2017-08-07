@@ -58,4 +58,11 @@ class Translate
         return $str;
     }
 
+    public static function RandomString($p1){
+        $String = null;
+        $Char = '0123456789abcdefghijklmnopqrstuvwxyz';
+        for ($i = 0; $i < $p1; $i ++) $String .= $Char[rand(0, strlen($Char) - 1)];
+        return $String;
+    }
+
 }
