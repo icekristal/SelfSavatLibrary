@@ -16,13 +16,7 @@ class Translate
     public $strurl = "";
 
 
-    public function __construct($str)
-    {
-        $this->strurl = $this->str2url($str);
-    }
-
-
-    private function letterfortranslete($string){
+    private static function letterfortranslete($string){
         $converter = array(
             'а' => 'a',   'б' => 'b',   'в' => 'v',
             'г' => 'g',   'д' => 'd',   'е' => 'e',
@@ -52,9 +46,9 @@ class Translate
         return strtr($string, $converter);
     }
 
-    private function str2url($str){
+    public static function str2url($str){
         // переводим в транслит
-        $str = $this->letterfortranslete($str);
+        $str = self::letterfortranslete($str);
         // в нижний регистр
         $str = strtolower($str);
         // заменям все ненужное нам на "-"
