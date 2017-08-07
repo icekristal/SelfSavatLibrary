@@ -13,10 +13,12 @@ class Translate
 {
 
 
+    public $strurl = "";
+
 
     public function __construct($str)
     {
-        return self::str2url($str);
+        $this->strurl = $this->str2url($str);
     }
 
 
@@ -31,7 +33,7 @@ class Translate
             'с' => 's',   'т' => 't',   'у' => 'u',
             'ф' => 'f',   'х' => 'h',   'ц' => 'c',
             'ч' => 'ch',  'ш' => 'sh',  'щ' => 'sch',
-            'ь' => '',  'ы' => 'y',   'ъ' => '',
+            'ь' => '',      'ы' => 'y',   'ъ' => '',
             'э' => 'e',   'ю' => 'yu',  'я' => 'ya',
 
             'А' => 'A',   'Б' => 'B',   'В' => 'V',
