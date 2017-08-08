@@ -43,11 +43,6 @@ class ImageUpload
             return $rezData;
         }
 
-        if($image["size"] > upload_max_filesize){
-            $rezData['success']=0;
-            $rezData['message']="Большой размер файла";
-            return $rezData;
-        }
 
         $type_n = 0;
         // Выбор формата
