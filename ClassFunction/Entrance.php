@@ -11,9 +11,9 @@ namespace fnc;
 
 class Entrance
 {
-        private $user_hash;
-        private $user_ip;
-        private $user_referer;
+    private $user_hash;
+    private $user_ip;
+    private $user_referer;
 
 
     function __construct()
@@ -22,11 +22,11 @@ class Entrance
         list($check_bot,$user_agent) = $this->SpotSearchBot();
         $this->user_hash=$user_agent;
         if($check_bot){
-          if(!$this->NewOrOldUser()){
-              $this->setCookieHash();
-          }else{
-              $this->user_hash=$this->NewOrOldUser();
-          }
+            if(!$this->NewOrOldUser()){
+                $this->setCookieHash();
+            }else{
+                $this->user_hash=$this->NewOrOldUser();
+            }
         }
     }
 
@@ -92,8 +92,8 @@ class Entrance
     }
 
     private function setCookieHash(){
-        $userhash = uniqid();
-        setcookie("UserHash", $userhash, 0x6FFFFFFF);
+        $userhash = uniqid('UQE');
+        setcookie("UserHash", $userhash,  time()+60*60*24*30*12*5,"/");
         return $this->user_hash = $userhash;
     }
 
