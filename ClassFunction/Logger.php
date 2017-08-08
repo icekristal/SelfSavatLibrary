@@ -28,11 +28,14 @@ class Logger
             mkdir("../logs");
             $this->PATH = "../logs";
         }else{
+            $this->PATH = "../logs";
             if(!file_exists($this->PATH."/".date("d.m.y").".log")){
-               $fp=fopen (date("d.m.y").".log", "w");
+                $fp=fopen (date("d.m.y").".log", "w");
                 fwrite($fp,"--> Первая запись в файле <--".PHP_EOL);
-                $this->PATH.="/".date("d.m.y").".log";
+
                 fclose($fp);
+            }else{
+                $this->PATH="../logs/".date("d.m.y").".log";
             }
         }
     }
@@ -42,7 +45,8 @@ class Logger
     {
         $end_message=$this->type_message_t." : ".date("H:i:s")." User-> ".$this->name_user."/*/ Message-> ".$this->message;
         $fp = fopen ($this->PATH, "a");
-        $fp = fwrite($fp,$end_message.PHP_EOL);
+        fwrite($fp,$end_message.PHP_EOL);
+        fclose($fp);
     }
 
     /**
@@ -64,9 +68,7 @@ class Logger
         return $this->type_message_t;
     }
 
-    public function __destruct(){
-        fclose($this->PATH);
-    }
+
 
 
 
