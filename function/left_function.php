@@ -76,6 +76,4 @@ function str2url($str) {
     return $str;
 }
 
-function testgit(){
-    echo "Testing GitHub";
-}
+

@@ -1,5 +1,7 @@
 <?php
 
+namespace fnc;
+
 class Logger
 {
 
