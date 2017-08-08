@@ -14,22 +14,40 @@ class Entrance
     private $user_hash;
     private $user_ip;
     private $user_referer;
+    public $user_session;
 
-
-    function __construct()
+    function __construct($session_user = null)
     {
 
         list($check_bot,$user_agent) = $this->SpotSearchBot();
         $this->user_hash=$user_agent;
         if($check_bot){
+            if(!$this->checkUserSession($session_user)){
             if(!$this->NewOrOldUser()){
                 $this->setCookieHash();
             }else{
                 $this->user_hash=$this->NewOrOldUser();
             }
+            }else{
+                $this->user_hash=$this->user_session['login'];
+            }
         }
     }
 
+    private function checkUserSession($session_user){
+        if(isset($_SESSION[$session_user])){
+            return $this->user_session = $_SESSION[$session_user];
+        }
+        return false;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getUserSession()
+    {
+        return $this->user_session;
+    }
     /**
      * @return mixed
      */
