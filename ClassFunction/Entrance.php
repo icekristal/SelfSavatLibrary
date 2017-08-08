@@ -23,22 +23,32 @@ class Entrance
         $this->user_hash=$user_agent;
         if($check_bot){
             if(!$this->checkUserSession($session_user)){
-            if(!$this->NewOrOldUser()){
-                $this->setCookieHash();
+                if(!$this->NewOrOldUser()){
+                    $this->setCookieHash();
+                }else{
+                    $this->user_hash=$this->NewOrOldUser();
+                }
             }else{
-                $this->user_hash=$this->NewOrOldUser();
-            }
-            }else{
+                $this->setUserSession($_SESSION[$session_user]);
                 $this->user_hash=$this->user_session['login'];
+
             }
         }
     }
 
     private function checkUserSession($session_user){
-        if(isset($_SESSION[$session_user])){
-            return $this->user_session = $_SESSION[$session_user];
+        if(isset($_SESSION[$session_user][0])){
+            return true;
         }
         return false;
+    }
+
+    /**
+     * @param mixed $user_session
+     */
+    private function setUserSession($user_session)
+    {
+        $this->user_session = $user_session;
     }
 
     /**
