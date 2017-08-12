@@ -11,25 +11,53 @@ namespace fnc;
 
 class Entrance
 {
-        private $user_hash;
-        private $user_ip;
-        private $user_referer;
+    private $user_hash;
+    private $user_ip;
+    private $user_referer;
+    public $user_session;
 
-
-    function __construct()
+    function __construct($session_user = null)
     {
 
         list($check_bot,$user_agent) = $this->SpotSearchBot();
         $this->user_hash=$user_agent;
         if($check_bot){
-          if(!$this->NewOrOldUser()){
-              $this->setCookieHash();
-          }else{
-              $this->user_hash=$this->NewOrOldUser();
-          }
+            if(!$this->checkUserSession($session_user)){
+                if(!$this->NewOrOldUser()){
+                    $this->setCookieHash();
+                }else{
+                    $this->user_hash=$this->NewOrOldUser();
+                }
+            }else{
+                $this->setUserSession($_SESSION[$session_user]);
+                $this->user_hash=$this->user_session['login'];
+
+            }
         }
     }
 
+    private function checkUserSession($session_user){
+        if(isset($_SESSION[$session_user][0])){
+            return true;
+        }
+        return false;
+    }
+
+    /**
+     * @param mixed $user_session
+     */
+    private function setUserSession($user_session)
+    {
+        $this->user_session = $user_session;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getUserSession()
+    {
+        return $this->user_session;
+    }
     /**
      * @return mixed
      */
@@ -92,8 +120,8 @@ class Entrance
     }
 
     private function setCookieHash(){
-        $userhash = uniqid();
-        setcookie("UserHash", $userhash, 0x6FFFFFFF);
+        $userhash = uniqid('UQE');
+        setcookie("UserHash", $userhash,  time()+60*60*24*30*12*5,"/");
         return $this->user_hash = $userhash;
     }
 

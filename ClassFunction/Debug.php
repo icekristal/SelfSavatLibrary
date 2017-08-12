@@ -12,15 +12,11 @@ namespace fnc;
 class Debug
 {
 
-   function __construct($value,$die)
-    {
-        $this->d($value,$die);
-    }
 
-    private function d($value = null, $die = 1){
+    public static function d($value = null, $die = 1){
         echo '<pre>';
         $trace = debug_backtrace();
-        echo $this->debugOut($trace);
+        echo self::debugOut($trace);
         echo "\n\n";
         var_dump($value);
         echo '</pre>';
@@ -28,7 +24,7 @@ class Debug
         if($die)die;
     }
 
-    private function debugOut($a){
+    private static function debugOut($a){
         $mt ='<br> <b>'.basename($a['file']).'</b>'
             . " <span style='color:red;'>({$a['line']})</span>"
             . " <span style='color:green;'>({$a['function']})</span>"
