@@ -72,6 +72,11 @@ function writelogfile($directory,$login,$text,$result){
 
     $textwrite = $date_write." // ".$resultt.$text;
     $file_name = $date_now.'.txt';
+
+    if(!is_dir("../logs/admin/{$login}")){
+        mkdir("../logs/admin/".$login);
+    }
+
     $file_pp = "../logs/$directory/$login/$file_name";
     if ( !file_exists( "$file_pp" ) ) { // если файл НЕ существует
         $fp = fopen ("$file_pp", "w");
