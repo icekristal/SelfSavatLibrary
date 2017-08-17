@@ -30,9 +30,9 @@ class Logger
         }else{
             $this->PATH = "../logs";
             if(!file_exists($this->PATH."/".date("d.m.y").".log")){
-                $fp=fopen (date("d.m.y").".log", "w");
+                $fp=fopen ($this->PATH."/".date("d.m.y").".log", "w");
                 fwrite($fp,"--> Первая запись в файле <--".PHP_EOL);
-
+                $this->PATH="../logs/".date("d.m.y").".log";
                 fclose($fp);
             }else{
                 $this->PATH="../logs/".date("d.m.y").".log";
