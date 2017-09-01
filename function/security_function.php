@@ -73,8 +73,8 @@ function writelogfile($directory,$login,$text,$result){
     $textwrite = $date_write." // ".$resultt.$text;
     $file_name = $date_now.'.txt';
 
-    if(!is_dir("../logs/admin/{$login}")){
-        mkdir("../logs/admin/".$login);
+    if(!is_dir("../logs/{$directory}/{$login}")){
+        mkdir("../logs/{$directory}/".$login);
     }
 
     $file_pp = "../logs/$directory/$login/$file_name";
