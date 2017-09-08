@@ -32,7 +32,9 @@ class EmailSend
      */
     public function setHeaderEnd($header_end,$email_sender)
     {
-        $this->header_end = $this->header_begin.$header_end."<{$email_sender}>\r\n";
+        $this->header_end = $this->header_begin;
+        $this->header_end.= $header_end."<{$email_sender}>\r\n";
+
     }
 
     /**
@@ -45,7 +47,7 @@ class EmailSend
 
     public function sendEmail(){
         foreach ($this->users_email as $item_email){
-          $send_go =  mail ($item_email,$this->subject,$this->message, $this->header_end);
+            $send_go =  mail ($item_email,$this->subject,$this->message, $this->header_end);
         }
     }
 
