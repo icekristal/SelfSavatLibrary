@@ -33,7 +33,7 @@ class EmailSend
     public function setHeaderEnd($header_end,$email_sender)
     {
         $this->header_end = $this->header_begin;
-        $this->header_end.= $header_end."<{$email_sender}>\r\n";
+        $this->header_end.= $header_end." <{$email_sender}>\r\n";
 
     }
 
