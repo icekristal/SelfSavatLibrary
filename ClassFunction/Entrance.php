@@ -65,6 +65,14 @@ class Entrance
     {
         return $this->user_hash;
     }
+    public function getUserHashTotal(){
+        if(!$this->NewOrOldUser()){
+            $this->setCookieHash();
+        }else{
+            $this->user_hash=$this->NewOrOldUser();
+        }
+        return $this->user_hash;
+    }
 
     /**
      * @return mixed

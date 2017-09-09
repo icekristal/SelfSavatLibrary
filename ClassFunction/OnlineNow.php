@@ -17,13 +17,14 @@ class OnlineNow
     private $connect;
     private $data_table;
 
-    public function __construct($connect,$data_table="online_now")
+    public function __construct($connect,$user_ip,$user_hash,$data_table="online_now")
     {
-     $this->setConnect($connect);
-     $this->setDataTable($data_table);
-
+        $this->setConnect($connect);
+        $this->setDataTable($data_table);
+        $this->setIpUser($user_ip);
+        $this->setHashUser($user_hash);
         $ex_table = $this->isTableExists($this->connect,$this->data_table);
-        if($ex_table==0){
+        if($ex_table==false){
             $this->createNeedTable();
             $this->processDB();
         }else{
@@ -31,6 +32,13 @@ class OnlineNow
         }
     }
 
+    /**
+     * @return mixed
+     */
+    public function getIpUser()
+    {
+        return $this->ip_user;
+    }
     /**
      * @param mixed $data_table
      */
@@ -81,10 +89,10 @@ class OnlineNow
         $sql = "SELECT * FROM `{$this->data_table}` WHERE `user_hash`='{$this->hash_user}' LIMIT 1";
         $rs = mysqli_query($this->connect,$sql);
         $row = mysqli_fetch_assoc($rs);
-            if(isset($row)){
-                return $row;
-            }
-            return false;
+        if(isset($row)){
+            return $row;
+        }
+        return false;
     }
 
     private function updateDB(){
@@ -94,22 +102,19 @@ class OnlineNow
     }
 
     private function insertDB(){
-        $sql = "INSERT INTO `{$this->data_table}` (user_ip, user_hash, city_auth,date_auth)
-        VALUES ('{$this->ip_user}','{$this->hash_user}','',NOW())";
+        $sql = "INSERT INTO `{$this->data_table}` (`user_ip`,`user_hash`,`city_auth`,`date_auth`)
+        VALUES ('{$this->ip_user}','{$this->hash_user}',' ',NOW())";
         $rs = mysqli_query($this->connect,$sql);
         return $rs;
     }
 
 
     private function isTableExists($dbLink, $tableName){
-        if ($stmt = mysqli_prepare($dbLink, "SHOW TABLES LIKE '?';")) {
-            mysqli_stmt_bind_param($stmt, "s", $tableName);
-            mysqli_stmt_execute($stmt);
-            mysqli_stmt_bind_result($stmt, $result);
-            mysqli_stmt_fetch($stmt);
-            mysqli_stmt_close($stmt);
+
+        if (!mysqli_query($dbLink,"SELECT * FROM `{$tableName}`")){
+            return false;
         }
-        return ( mysqli_affected_rows($dbLink) > 0);
+        return true;
     }
 
     private function createNeedTable(){
