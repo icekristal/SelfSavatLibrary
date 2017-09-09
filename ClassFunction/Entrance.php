@@ -37,7 +37,7 @@ class Entrance
     }
 
     private function checkUserSession($session_user){
-        if(isset($_SESSION[$session_user][0])){
+        if(isset($_SESSION[$session_user])){
             return true;
         }
         return false;
