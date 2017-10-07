@@ -34,7 +34,7 @@ class APITelegramm
     /**
      * @param string $api_url_tel
      */
-    public function setApiUrlTel()
+    private function setApiUrlTel()
     {
         $this->api_url_tel = "https://api.telegram.org/bot".$this->getBotToken()."/";
     }
